@@ -8,6 +8,8 @@ Addons for [HTMLPurifier](http://htmlpurifier.org/ "HTML Purifier - Filter your 
 
 Flexible content filter for granular control over iframes embedding.
 
+[Discussion for Iframe plugin is here](http://htmlpurifier.org/phorum/read.php?2,6715).
+
 ### With this plugin you can:
 
 1. Control which iframe tags will be preserved and which would be dropped.
