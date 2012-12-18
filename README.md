@@ -53,7 +53,7 @@ See **$default_options** static property for options documentation.
         // Allowing only specific URI's for SoundCloud and DailyMotion.
         'callback.is_uri_allowed' => function($uri) {
             if (
-                   preg_match('@^https://w.soundcloud.com/player/@i',       $uri)
+                   preg_match('@^https://w\.soundcloud\.com/player/@i',     $uri)
                 || preg_match('@^http://(www\.)?dailymotion\.com/embed/@i', $uri)
             ) {
                 return true;
