@@ -79,6 +79,8 @@ See **$default_options** static property for options documentation.
     $purifier = new HTMLPurifier($purifierConfig);
 
     return $purifier->purify($content);
+    
+For now you have to maintain your own filter stack (list of allowed services), but in the future i plan to create public whitelist of secure services, that could be imported into your implementation.
 
 ---
 Slava Fomin II, CEO BETSOL GROUP  
