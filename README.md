@@ -63,7 +63,7 @@ See **$default_options** static property for options documentation.
         // And finally blocking the single video from YouTube.
         'callback.is_uri_denied' => function($uri) {
             if (
-               preg_match('@^http://(www\.)?youtube\.com/watch\?v=IytNBm8WA1c@i', $uri)
+               preg_match('@^http://(www\.)?youtube\.com/watch\?(.*?)&?v=IytNBm8WA1c@i', $uri)
             ) {
                 return true;
             }
