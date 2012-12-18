@@ -45,7 +45,7 @@ See **$default_options** static property for options documentation.
     
     // Setting filters.
     $iframeFilter = new HTMLPurifier_Filter_Betsol_Iframe(array(
-        // Initially allowing everything from YouTube domain.
+        // Initially allowing everything from the YouTube's domain.
         'allowed_domains' => array(
             'youtube.com',
         ),
@@ -60,7 +60,7 @@ See **$default_options** static property for options documentation.
             }
         },
         
-        // And finally blocking the single video from YouTube.
+        // And finally blocking a single video from the YouTube.
         'callback.is_uri_denied' => function($uri) {
             if (
                preg_match('@^http://(www\.)?youtube\.com/watch\?(.*?)&?v=IytNBm8WA1c@i', $uri)
