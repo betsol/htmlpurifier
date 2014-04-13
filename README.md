@@ -39,52 +39,45 @@ See **$default_options** static property for options documentation.
 
 ### Usage example:
 
-    // Some content with <iframe> tags.
-    $content = '...';
+```php
+// Some content with <iframe> tags.
+$content = '...';
 
-    /** @var HTMLPurifier_Config $purifierConfig */
-    $purifierConfig = HTMLPurifier_Config::createDefault();
-    
-    // Setting filters.
-    $iframeFilter = new HTMLPurifier_Filter_Betsol_Iframe(array(
-        // Initially allowing everything from the YouTube's domain.
-        'allowed_domains' => array(
-            'youtube.com',
-        ),
-        
-        // Allowing only specific URI's for SoundCloud and DailyMotion.
-        'callback.is_uri_allowed' => function($uri) {
-            if (
-                   preg_match('@^https://w\.soundcloud\.com/player/@i',     $uri)
-                || preg_match('@^http://(www\.)?dailymotion\.com/embed/@i', $uri)
-            ) {
-                return true;
-            }
-        },
-        
-        // And finally blocking a single video from the YouTube.
-        'callback.is_uri_denied' => function($uri) {
-            if (
-               preg_match('@^http://(www\.)?youtube\.com/watch\?(.*?)&?v=IytNBm8WA1c@i', $uri)
-            ) {
-                return true;
-            }
-        },
-    ));
-    
-    $purifierConfig->set('Filter.Custom', array(
-        $iframeFilter,
-    ));
-    
-    $purifier = new HTMLPurifier($purifierConfig);
+/** @var HTMLPurifier_Config $purifierConfig */
+$purifierConfig = HTMLPurifier_Config::createDefault();
 
-    return $purifier->purify($content);
+// Setting filters.
+$iframeFilter = new HTMLPurifier_Filter_Betsol_Iframe(array(
+    // Initially allowing everything from the YouTube's domain.
+    'allowed_domains' => array(
+        'youtube.com',
+    ),
     
-For now you have to maintain your own filter stack (list of allowed services), but in the future i plan to create public whitelist of secure services, that could be imported into your implementation.
+    // Allowing only specific URI's for SoundCloud and DailyMotion.
+    'callback.is_uri_allowed' => function($uri) {
+        if (
+               preg_match('@^https://w\.soundcloud\.com/player/@i',     $uri)
+            || preg_match('@^http://(www\.)?dailymotion\.com/embed/@i', $uri)
+        ) {
+            return true;
+        }
+    },
+    
+    // And finally blocking a single video from the YouTube.
+    'callback.is_uri_denied' => function($uri) {
+        if (
+           preg_match('@^http://(www\.)?youtube\.com/watch\?(.*?)&?v=IytNBm8WA1c@i', $uri)
+        ) {
+            return true;
+        }
+    },
+));
 
----
-Slava Fomin II, CEO BETSOL GROUP  
-Got any questions, ideas, propositions?  
-Feel free to contact me at: <<s.fomin@betsol.ru>>  
-From Russia with Love.  
-Let's make this World a Better place!
+$purifierConfig->set('Filter.Custom', array(
+    $iframeFilter,
+));
+
+$purifier = new HTMLPurifier($purifierConfig);
+
+return $purifier->purify($content);
+```
